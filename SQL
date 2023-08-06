@@ -1,0 +1,19 @@
+SQL Question: Assume you are given the table below on Uber transactions made by users. Write a query to obtain the third transaction of every user. Output the user id, spend and transaction date.
+
+WITH third_transaction AS(
+  SELECT user_id,
+         spend,
+         transaction_date,
+         ROW_NUMBER() OVER(
+         PARTITION BY user_id
+         ORDER BY transaction_date) AS row_number
+  FROM transactions)
+  
+  SELECT 
+    user_id,
+    spend,
+    transaction_date
+  FROM third_transaction
+  WHERE row_number = 3
+
+
