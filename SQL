@@ -16,4 +16,3 @@ WITH third_transaction AS(
   FROM third_transaction
   WHERE row_number = 3
 
-
